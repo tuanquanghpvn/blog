@@ -1,0 +1,2 @@
+# PyBlog
+Blog for everyone
