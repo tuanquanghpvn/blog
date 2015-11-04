@@ -14,7 +14,7 @@ class Products(Describable, Timestampable):
     class Meta:
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
-        db_table = 'Product'
+        db_table = 'product'
 
     
 

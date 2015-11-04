@@ -40,7 +40,8 @@ INSTALLED_APPS = (
 
     'apps.categories',
     'apps.posts',
-    'apps.products'
+    'apps.products',
+    'apps.tags',
 )
 
 MIDDLEWARE_CLASSES = (
