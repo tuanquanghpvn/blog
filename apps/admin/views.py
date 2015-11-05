@@ -227,7 +227,7 @@ class TagUpdateView(AdminRequiredMixin, UpdateView):
     fields = ('name', 'slug', 'description',)
 
     def get_context_data(self, **kwargs):
-        context = super().get_contex_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         info = {
             'info': {
                 'title': 'Tag Update',
