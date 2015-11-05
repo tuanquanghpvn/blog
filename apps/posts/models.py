@@ -6,10 +6,14 @@ from apps.categories.models import Category
 
 # Create your models here.
 class Post(Describable, Timestampable):
-    content = models.TextField
+    content = models.TextField()
     category = models.ForeignKey(Category)
-    image = models.ImageField(upload_to=settings.POST_DIR, blank=False, max_length=255)
-    user = models.ForeignKey(UserProfile)
+    image = models.ImageField(upload_to=settings.POST_DIR, blank=False,
+                                                        max_length=255)
+    profile = models.ForeignKey(UserProfile)
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name = 'Post'

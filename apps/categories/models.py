@@ -6,6 +6,9 @@ from apps.core.models import (Describable, Timestampable)
 
 class Category(Describable, Timestampable):
 
+   def __str__(self):
+       return self.name
+
    class Meta:
        verbose_name = 'Category'
        verbose_name_plural = 'Categories'

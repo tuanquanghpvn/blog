@@ -7,12 +7,14 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Book
+           Post 
             <small>List</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Book</li>
+                <li>
+                    <a href="{% url 'admin:dashboard' %}"><i class="fa fa-dashboard"></i> Home</a>
+                </li>
+                <li class="active">Post</li>
         </ol>
     </section>
     <!-- Main content -->
@@ -22,7 +24,7 @@
                 <div class="box box-danger">
                     <div class="box-header with-border">
                         <div class="pull-right">
-                            <a class="btn btn-xs btn-warning" href="/admin/book/create">New Book</a>
+                                <a class="btn btn-xs btn-warning" href="{% url 'admin:post_create' %}">New Post</a>
                         </div>
                     </div>
                     <!-- /.box-header -->
@@ -30,28 +32,26 @@
                         <table class="table table-bordered">
                             <tr>
                                 <th style="width: 10px">#</th>
-                                <th>Title</th>
                                 <th>Author</th>
-                                <th>Number Of Pages</th>
-                                <th>Publish Date</th>
-                                <th>Price</th>
-                                <th>Rating</th>
+                                <th>Name</th>
+                                <th>Slug</th>
+                                <th>Category</th>
+                                <th>Description</th>
                                 <th class="text-center" style="width: 200px">Action</th>
                             </tr>
-                            {% for item in list_book %}
+                            {% for item in object_list %}
                                 <tr>
                                     <td>{{ item.id }}.</td>
-                                    <td>{{ item.title }}</td>
-                                    <td>{{ item.author }}</td>
-                                    <td>{{ item.pages }}</td>
-                                    <td>{{ item.publish_date }}</td>
-                                    <td>${{ item.price }}</td>
-                                    <td>{{ item.get_rating }}</td>
+                                    <td>{{ item.profile.user.username }}</td>
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ item.slug }}</td>
+                                    <td>{{ item.category.name }}</td>
+                                    <td>{{ item.description }}</td>
                                     <td class="text-center">                                        
-                                        <a href="/admin/book/update/{{ item.id }}">
+                                        <a href="{% url 'admin:post_update' item.id %}">
                                             <span class="badge">Update</span>
                                         </a>
-                                        <a href="#" data-href="/admin/book/delete/{{ item.id }}" data-toggle="modal" data-target="#confirm-delete">
+                                        <a href="#" data-href="{% url 'admin:post_delete' item.id %}" data-toggle="modal" data-target="#confirm-delete">
                                             <span class="badge bg-red">Delete</span>
                                         </a>
                                     </td>

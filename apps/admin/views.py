@@ -13,6 +13,8 @@ from apps.categories.models import Category
 from apps.posts.models import Post
 from apps.products.models import Products
 from apps.tags.models import Tag
+from apps.admin.forms import PostForm
+
 
 class DashboardView(AdminRequiredMixin, TemplateView):
     template_name = 'admin/dashboard.html'
@@ -129,10 +131,10 @@ class PostListView(AdminRequiredMixin, ListView):
 class PostCreateView(AdminRequiredMixin, CreateView):
     model = Post
     template_name = 'admin/post_create.html'
-    fields = ('name', 'slug', 'description', 
-               'content', 'image', 'category',)
+    form_class = PostForm
 
     def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         info = {
             'info': {
                 'title': 'Post Create',
@@ -142,16 +144,22 @@ class PostCreateView(AdminRequiredMixin, CreateView):
         context.update(info)
         return context
 
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        post.profile = self.request.user.profile
+        post.save()
+        return super().form_valid(form)
+
     def get_success_url(self):
         return reverse_lazy('admin:post_list')
 
 class PostUpdateView(AdminRequiredMixin, UpdateView):
     model = Post
     template_name = 'admin/post_update.html'
-    fields = ('name', 'slug', 'description',
-               'content', 'image', 'category',)
+    form_class = PostForm
 
     def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         info = {
             'info': {
                 'title': 'Post Update',
@@ -160,6 +168,12 @@ class PostUpdateView(AdminRequiredMixin, UpdateView):
         }
         context.update(info)
         return context
+
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        post.profile = self.request.user.profile
+        post.save()
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy('admin:post_list')

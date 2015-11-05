@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'apps.core',
     'apps.categories',
     'apps.posts',
     'apps.products',
@@ -121,3 +122,4 @@ STATICFILES_DIRS = (
 # Upload base dir name
 POST_DIR = 'post'
 PRODUCT_DIR = 'product'
+AVATAR_DIR = 'avatar'
